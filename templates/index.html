@@ -1,0 +1,101 @@
+{% extends 'base.html' %} {% block content %}
+<section id="about-bangalore">
+  <div id="first-div">
+    <!-- Content about Bangalore goes here -->
+    <h1>Unlock the Future of Bangalore Real Estate</h1>
+    <h3>Predicting Property Prices with Precision!</h3>
+  </div>
+</section>
+<section id="form-section" class="form-background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- First column for GIF -->
+        <img
+          src="https://cdn.pixabay.com/animation/2022/08/06/11/56/11-56-56-209_512.gif"
+          alt="GIF"
+        />
+      </div>
+      <div class="col-md-6 animated-text" id="animated-text">
+        <!-- Third column for catchy line -->
+        <p class="catchy-line">
+          Unlock <span class="future">the Future</span> of Bangalore Real Estate
+        </p>
+        <br />
+        <p class="catchy-line">
+          Charting the
+          <span class="future">course of Bangalore's</span> property market-
+          predict, invest, succeed
+        </p>
+        <br />
+        <p class="catchy-line">
+          Your key to <span class="future">informed decisions </span>lucrative
+          investments!
+        </p>
+      </div>
+
+      <div class="col-md-3">
+        <!-- Second column for prediction model -->
+        <div class="maindiv">
+          <h1>Prediction Model</h1>
+          <br />
+          <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <p>{{ form.squareft.label }}<br />{{ form.squareft(size=32) }}</p>
+            <p>{{ form.bath.label }}<br />{{ form.bath(size=32) }}</p>
+            <p>{{ form.bhk.label }}<br />{{ form.bhk(size=32) }}</p>
+            <p>
+              {{ form.location.label }}<br />
+              <select id="location" name="location">
+                {% for column in locations %}
+                <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+              </select>
+            </p>
+            <div class="button-group">
+              <p>{{ form.submit() }}</p>
+              <button type="button" onclick="clearForm()">Clear All</button>
+            </div>
+          </form>
+        </div>
+
+        {% if form.validate_on_submit() %}
+        <div id="price" class="maindiv">
+          <h4>The estimated price is</h4>
+          <h4>{{price}} Lakh</h4>
+          <br />
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<section id="third-section">
+  
+</section>
+<div class="footer">
+  <p>MADE WITH ❤ by Palki</p>
+  <p>&copy; All rights reserved</p>
+</div>
+<script>
+  function clearForm() {
+    console.log("Clear form function called");
+    document.querySelector('input[name="squareft"]').value = "";
+    document.querySelector('input[name="bath"]').value = "";
+    document.querySelector('input[name="bhk"]').value = "";
+    document.querySelector('select[name="location"]').value = "";
+    document.getElementById("price").style.display = "none";
+  }
+
+  window.addEventListener("scroll", function () {
+    var element = document.getElementById("animated-text");
+    var position = element.getBoundingClientRect();
+    var windowHeight = window.innerHeight;
+    if (position.top < windowHeight && position.bottom >= 0) {
+      element.classList.add("animate-in");
+    } else {
+      element.classList.remove("animate-in");
+    }
+  });
+</script>
+{% endblock %}
